@@ -36,24 +36,24 @@ I will use external APIs, namely from openexchangerates.org and exchangerate-api
 determine which one works best during construction. To keep the application seamless, I will use
 localStorage.
 ## Initial Module list:
-• The header and footer will be modularized.
-• Since every currency can have its page showing all its exchange rates, there shall be a
+* The header and footer will be modularized.
+* Since every currency can have its page showing all its exchange rates, there shall be a
 boilerplate to fit in the data fetched from the API.
 Colors/ Typography/ Specific element styling:
-• Primary Color: #252323. This color will be the color of the logo and will be the most
+* Primary Color: #252323. This color will be the color of the logo and will be the most
 defining color of the page, used on the header, the footer, and the buttons.
-• Secondary Color: #f5f1ed. This color will act as a background and be contrasted with the
+* Secondary Color: #f5f1ed. This color will act as a background and be contrasted with the
 primary color where needed.
-• Tertiary colors: #70798c, #a99985. On links and other places where the primary and
+* Tertiary colors: #70798c, #a99985. On links and other places where the primary and
 secondary color cannot be used, these two colors will be used to define the page and keep
 its essence.
-• The main font of the website will be monospace, backed by sans-serif.
-• Curves will be used to make it aesthetically appealing.
+* The main font of the website will be monospace, backed by sans-serif.
+* Curves will be used to make it aesthetically appealing.
 
 ## Schedule / Timeline of development:
-• Create a home page for the application, with placeholders for cards and drop-down data.
-• Revise the API’s data structure and feed it to the front page and program the results of a
+* Create a home page for the application, with placeholders for cards and drop-down data.
+* Revise the API’s data structure and feed it to the front page and program the results of a
 search as needed.
-• Modularize the header and footer and make the template for the grid of cards to receive
+* Modularize the header and footer and make the template for the grid of cards to receive
 data from the API for each currency dynamically.
-• Make the search bar.
+* Make the search bar.
