@@ -57,7 +57,7 @@ function convert(){
     const conversionSelect = document.getElementById('convesionSelect');
     results.innerText = exchangeRatesData.conversion_rates[conversionSelect.value];
     console.log(conversionSelect.value);
-    document.getElementById('convertThis').addEventListener('change', function() {
+    document.getElementById('convertThis').addEventListener('input', function() {
         let theConverted = exchangeRatesData.conversion_rates[conversionSelect.value]*this.value;
         if (!this.value){
             results.innerText = exchangeRatesData.conversion_rates[conversionSelect.value]; 
