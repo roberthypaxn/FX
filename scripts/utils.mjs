@@ -21,3 +21,22 @@ export function fetchExchangeRates(func, base) {
         console.error('Error fetching exchange rates:', error);
       });
 }
+export async function loadHeaderFooter() {
+  const header = document.querySelector("header");
+  const footer = document.querySelector("footer");
+  const headerTemplate = await loadTemplate("../includes/header.html");
+  const footerTemplate =  await loadTemplate("../includes/footer.html");
+  console.log(footer);
+  renderWithTemplate(header, headerTemplate);
+  renderWithTemplate(footer, footerTemplate);
+}
+async function renderWithTemplate(element, data, position = "afterBegin") {
+//Render the template using just javascript with no libraries
+  console.log(data);
+  element.innerHTML = data; 
+}
+async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
