@@ -21,18 +21,33 @@ export function fetchExchangeRates(func, base) {
         console.error('Error fetching exchange rates:', error);
       });
 }
+
+export function fetchSearchRates(func, base, e) {
+  const url = `${baseURL}/${appId}/latest/${base}`;
+  
+  fetch(url)
+    .then(handleResponse)
+    .then(data => {
+      func(data, e);
+    })
+    .catch(error => {
+      console.error('Error fetching exchange rates:', error);
+    });
+}
 export async function loadHeaderFooter() {
   const header = document.querySelector("header");
   const footer = document.querySelector("footer");
+  const hero = document.querySelector(".hero");
   const headerTemplate = await loadTemplate("../includes/header.html");
   const footerTemplate =  await loadTemplate("../includes/footer.html");
-  console.log(footer);
+  const heroTemplate =  await loadTemplate("../includes/hero.html");
   renderWithTemplate(header, headerTemplate);
   renderWithTemplate(footer, footerTemplate);
+  renderWithTemplate(hero, heroTemplate);
+
 }
 async function renderWithTemplate(element, data, position = "afterBegin") {
 //Render the template using just javascript with no libraries
-  console.log(data);
   element.innerHTML = data; 
 }
 async function loadTemplate(path) {
