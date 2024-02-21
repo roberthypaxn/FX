@@ -10,7 +10,7 @@ function handleResponse(response) {
   return response.json();
 }
 
-export function fetchExchangeRates(func, base = "USD") {
+export function fetchExchangeRates(func, base) {
     const url = `${baseURL}/${appId}/latest/${base}`;
     
     fetch(url)
@@ -23,7 +23,7 @@ export function fetchExchangeRates(func, base = "USD") {
       });
 }
 
-export function fetchSearchRates(func, e, base = "USD") {
+export function fetchSearchRates(func, e, base) {
   const url = `${baseURL}/${appId}/latest/${base}`;
   
   fetch(url)

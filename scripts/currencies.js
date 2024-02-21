@@ -2,7 +2,11 @@
 import { fetchExchangeRates } from "./utils.mjs";
 import { fetchSearchRates } from "./utils.mjs";
 
-let baseCurr = "USD";
+let baseCurr = localStorage.getItem('baseCurrency');
+if(baseCurr == null){
+  localStorage.setItem('baseCurrency', 'USD');
+  baseCurr = localStorage.getItem('baseCurrency');
+}
 
 function populateSection(data) {
   const group = document.getElementById('currencies');
@@ -16,7 +20,7 @@ function populateSection(data) {
   
 }
 
-fetchExchangeRates(populateSection);
+fetchExchangeRates(populateSection, baseCurr);
 
 function populateSelect(data) {
   const select = document.getElementById('currencySelector');
@@ -61,8 +65,9 @@ searchInput.addEventListener("input", event =>{
 document.getElementById('currencySelector').addEventListener('change', function() {
   // Update baseCurrency with the value of the selected option
   baseCurr = this.value;
+  localStorage.setItem('baseCurrency', baseCurr);
   // Re-fetch exchange rates data with the updated baseCurrency
   fetchExchangeRates(populateSelect,baseCurr);
   fetchExchangeRates(populateSection,baseCurr);
 });
-fetchExchangeRates(populateSelect);
+fetchExchangeRates(populateSelect, baseCurr);
