@@ -1,3 +1,4 @@
+//utils.mjs
 const appId = 'd0d9e4b413d8edec14f86df6';
 const baseURL = 'https://v6.exchangerate-api.com/v6';
 
@@ -9,7 +10,7 @@ function handleResponse(response) {
   return response.json();
 }
 
-export function fetchExchangeRates(func, base) {
+export function fetchExchangeRates(func, base = "USD") {
     const url = `${baseURL}/${appId}/latest/${base}`;
     
     fetch(url)
@@ -22,7 +23,7 @@ export function fetchExchangeRates(func, base) {
       });
 }
 
-export function fetchSearchRates(func, base, e) {
+export function fetchSearchRates(func, e, base = "USD") {
   const url = `${baseURL}/${appId}/latest/${base}`;
   
   fetch(url)
