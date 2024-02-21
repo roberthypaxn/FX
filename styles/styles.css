@@ -39,6 +39,7 @@ nav>a{
     color: var(--dark-grey);
     background-color: var(--tertiary-color);
     padding: .2em;
+    border: 2px solid var(--dark-grey);
 }
 nav>a:hover{
     background-color: var(--dark-grey);
@@ -69,7 +70,7 @@ header{
     font-size: var(--large-font);
     text-align: center;
 }
-.converter{
+.converter, .search_select{
     width: 90%;
     border: 2px solid var(--dark-grey);
     border-radius: 5px;
@@ -108,7 +109,8 @@ footer{
     flex-flow: row wrap;
     justify-content: space-evenly;
     list-style-type: none;
-    margin: 50px 50px 20px 50px;
+    margin: 50px 50px 0px 50px;
+    padding-bottom: 20px;
 }
 main>a{
     display: block;
@@ -133,12 +135,13 @@ main>a:hover{
     text-align: center;
     font-weight: bold;
 }
+
 @media screen and (min-width:500px){
     body{
         max-width: 1080px;
         margin: 0 auto;
     }
-    .converter{
+    .converter, .search_select{
         width: auto;
         padding: 2em;
         background-color: var(--light-grey);
@@ -157,6 +160,16 @@ main>a:hover{
     input, select{
         width: auto;
     }
+    .group{
+        width: 50%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    #currencySelector, #search{
+        width: 50%;
+    }
+
     h1{
         display: block;
     }

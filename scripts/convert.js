@@ -1,16 +1,6 @@
-const appId = 'd0d9e4b413d8edec14f86df6';
-const baseURL = 'https://v6.exchangerate-api.com/v6';
+import { fetchExchangeRates } from "./utils.mjs";
 
 let baseCurrency = "USD";
-let exchangeRatesData = null;
-
-// Function to handle the response
-function handleResponse(response) {
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-}
 
 function populateSelect(data) {
   const select = document.getElementById('baseSelect');
@@ -21,7 +11,7 @@ function populateSelect(data) {
       option.text = currency;
       select.appendChild(option);
   }
-  const selectCurr = document.getElementById('convesionSelect');
+  const selectCurr = document.getElementById('conversionSelect');
   const conversion = data.conversion_rates;
   for (const currency in conversion) {
       const option = document.createElement('option');
@@ -31,32 +21,14 @@ function populateSelect(data) {
   }
 }
 
-// Function to fetch exchange rates data
-function fetchExchangeRates() {
-  const url = `${baseURL}/${appId}/latest/${baseCurrency}`;
-  
-  fetch(url)
-    .then(handleResponse)
-    .then(data => {
-      // Process the data here
-      exchangeRatesData = data
-      //console.log(data);
-      populateSelect(data);
-      convert();
-    })
-    .catch(error => {
-      console.error('Error fetching exchange rates:', error);
-    });
-}
-// Call the function to fetch exchange rates
-fetchExchangeRates();
+fetchExchangeRates(populateSelect, baseCurrency);
 
-function convert(){
-    results = document.getElementById('converted');
+function convert(exchangeRatesData){
+    const results = document.getElementById('converted');
     //console.log(exchangeRatesData.conversion_rates);
-    const conversionSelect = document.getElementById('convesionSelect');
+    const conversionSelect = document.getElementById('conversionSelect');
     results.innerText = exchangeRatesData.conversion_rates[conversionSelect.value];
-    console.log(conversionSelect.value);
+    //console.log(conversionSelect.value);
     document.getElementById('convertThis').addEventListener('input', function() {
         let theConverted = exchangeRatesData.conversion_rates[conversionSelect.value]*this.value;
         if (!this.value){
@@ -67,31 +39,31 @@ function convert(){
         console.log(theConverted)
     });
 }
-
+fetchExchangeRates(convert, baseCurrency);
 //Add event listener to select element
 document.getElementById('baseSelect').addEventListener('change', function() {
     // Update baseCurrency with the value of the selected option
     baseCurrency = this.value;
-    console.log(baseCurrency);
+    //console.log(baseCurrency);
     
     // Re-fetch exchange rates data with the updated baseCurrency
-    fetchExchangeRates();
+    fetchExchangeRates(populateSelect,baseCurrency);
+    fetchExchangeRates(convert, baseCurrency);
   });
 
-//Add event listener to pair select element
-document.getElementById('convesionSelect').addEventListener('change', function() {
+function conversionSelect(exchangeRatesData){
+  //Add event listener to pair select element
+  document.getElementById('conversionSelect').addEventListener('change', function() {
     const currency_rate = this.value;
-    results = document.getElementById('converted');
-    amountInput = document.getElementById('convertThis');
+    const results = document.getElementById('converted');
+    const amountInput = document.getElementById('convertThis');
     amountInput.value = '';
-    
     results.innerText = exchangeRatesData.conversion_rates[currency_rate];
 
 //    console.log(exchangeRatesData.conversion_rates[currency_rate]);
 });
-
-
-
+}
+fetchExchangeRates(conversionSelect, baseCurrency);
 
 function getFourRandom(obj, count) {
   let keys = Object.keys(obj);
@@ -124,22 +96,4 @@ function displayOnHome(data){
     group.innerHTML += card;
   }
 }
-
-// Function to fetch exchange rates data
-function fetchCurrencies() {
-    const url = `${baseURL}/${appId}/latest/USD`;
-    
-    fetch(url)
-      .then(handleResponse)
-      .then(data => {
-        // Process the data here
-        //console.log(data);
-        displayOnHome(data);
-
-      })
-      .catch(error => {
-        console.error('Error fetching exchange rates:', error);
-      });
-  }
-  // Call the function to fetch exchange rates
-  fetchCurrencies();
+fetchExchangeRates(displayOnHome,"USD");
